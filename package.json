@@ -1,0 +1,16 @@
+{
+  "name": "gedcom",
+  "version": "1.0.0",
+  "description": "training on gedcom",
+  "license": "ISC",
+  "author": "tsurubari",
+  "type": "commonjs",
+  "main": "parse.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "gedcom.json": "^1.0.9",
+    "topola": "^3.8.1"
+  }
+}

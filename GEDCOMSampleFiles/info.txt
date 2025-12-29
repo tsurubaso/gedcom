@@ -1,0 +1,9 @@
+https://github.com/rootsdev/gedcomx-js moderne mais peu adopte
+http://gedcomx.org/FAQ.html moderne peu adopte
+
+
+https://github.com/tmcw/gedcom/blob/main/docs/README.md
+fresh
+
+https://docs.arbre.app/read-gedcom/pages/quickstart.html
+ancien mais recommandé
