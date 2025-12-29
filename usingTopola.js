@@ -1,67 +1,89 @@
 const fs = require('fs');
 const Topola = require('topola');
 
-async function genererArbreSVG() {
+async function genererArbreComplet() {
     try {
         const gedcomRaw = fs.readFileSync('./LucasFamilly.ged', 'utf-8');
         const data = Topola.gedcomToJson(gedcomRaw);
-        
-        console.log(`✅ ${data.indis.length} individus chargés.`);
 
-        // 1. Trouver une personne qui a au moins un lien familial pour éviter un arbre vide
-        const depart = data.indis.find(i => (i.famc || i.fams)) || data.indis[0];
-        console.log(`📍 Départ de l'arbre : ${depart.firstName} ${depart.lastName} (${depart.id})`);
+        const NODE_W = 200, NODE_H = 50, GAP_X = 50, GAP_Y = 100;
+        let nodes = [], links = [];
+        let processedIndis = new Set();
 
-        const dataProvider = new Topola.JsonDataProvider(data);
-        const renderer = new Topola.SimpleRenderer();
-
-        // 2. Créer l'arbre
-        const chart = Topola.createChart({
-            data: dataProvider,
-            renderer: renderer,
-            chartType: 'relatives',
-            startIndi: depart.id
-        });
-
-        // Vérification de sécurité
-        if (!chart.nodes || chart.nodes.length === 0) {
-            throw new Error("Aucun nœud généré pour cet individu.");
+        function addNode(indiId, x, y, color = "white") {
+            if (processedIndis.has(indiId + y)) return; // Éviter les doublons au même niveau
+            const indi = data.indis.find(i => i.id === indiId);
+            if (!indi) return;
+            nodes.push({ id: indiId, x, y, name: `${indi.firstName} ${indi.lastName}`, color });
+            processedIndis.add(indiId + y);
         }
 
-        // 3. Calculer les dimensions (ViewBox)
-        const info = Topola.getChartInfo(chart);
-        
-        // Construction du SVG
-        let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${info.originX - 50} ${info.originY - 50} ${info.width + 100} ${info.height + 100}" style="background-color: white;">`;
-        
-        // Style pour les lignes
-        svgContent += `<style>.link { fill: none; stroke: #888; stroke-width: 2px; } .node-rect { fill: #fff; stroke: #333; stroke-width: 1.5px; } .node-text { font-family: sans-serif; font-size: 12px; }</style>`;
+        // 1. MONTER : Les Ancêtres (Parents de I1)
+        function buildUp(indiId, x, y, level) {
+            const indi = data.indis.find(i => i.id === indiId);
+            if (!indi || level > 4) return;
+            addNode(indiId, x, y, "#e3f2fd"); // Bleu clair pour ancêtres
 
-        // Dessiner les liens
-        chart.links.forEach(link => {
-            svgContent += `<path class="link" d="${link.path}" />`;
+            const fam = data.fams.find(f => f.id === indi.famc);
+            if (fam) {
+                const offset = Math.pow(2, 4 - level) * 60;
+                if (fam.husband) {
+                    links.push({ x1: x + 100, y1: y, x2: x - offset + 100, y2: y - GAP_Y + 50 });
+                    buildUp(fam.husband, x - offset, y - GAP_Y, level + 1);
+                }
+                if (fam.wife) {
+                    links.push({ x1: x + 100, y1: y, x2: x + offset + 100, y2: y - GAP_Y + 50 });
+                    buildUp(fam.wife, x + offset, y - GAP_Y, level + 1);
+                }
+            }
+        }
+
+        // 2. DESCENDRE : Les Enfants (issus des mariages de I1)
+        function buildDown(indiId, x, y) {
+            const indi = data.indis.find(i => i.id === indiId);
+            if (!indi || !indi.fams) return;
+
+            indi.fams.forEach((famId, fIndex) => {
+                const fam = data.fams.find(f => f.id === famId);
+                if (fam && fam.children) {
+                    fam.children.forEach((childId, cIndex) => {
+                        const childX = x + (cIndex - (fam.children.length-1)/2) * (NODE_W + 20);
+                        const childY = y + GAP_Y;
+                        links.push({ x1: x + 100, y1: y + 50, x2: childX + 100, y2: childY });
+                        addNode(childId, childX, childY, "#f1f8e9"); // Vert clair pour descendants
+                        // On pourrait appeler buildDown récursivement ici pour les petits-enfants
+                    });
+                }
+            });
+        }
+
+        // Initialisation autour de I1
+        const startX = 2000, startY = 1000;
+        buildUp('I1', startX, startY, 1);
+        buildDown('I1', startX, startY);
+
+        // --- GÉNÉRATION SVG ---
+        const minX = Math.min(...nodes.map(n => n.x)) - 200;
+        const minY = Math.min(...nodes.map(n => n.y)) - 200;
+        const width = Math.max(...nodes.map(n => n.x + NODE_W)) - minX + 200;
+        const height = Math.max(...nodes.map(n => n.y + NODE_H)) - minY + 200;
+
+        let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${minX} ${minY} ${width} ${height}" style="background-color: #fafafa;">`;
+        links.forEach(l => svg += `<line x1="${l.x1}" y1="${l.y1}" x2="${l.x2}" y2="${l.y2}" stroke="#90a4ae" stroke-width="1.5" />`);
+        nodes.forEach(n => {
+            svg += `<g transform="translate(${n.x}, ${n.y})">
+                <rect width="${NODE_W}" height="${NODE_H}" rx="5" fill="${n.color}" stroke="#37474f" stroke-width="1" />
+                <text x="10" y="30" font-family="Arial" font-size="10" font-weight="bold">${n.name.toUpperCase()}</text>
+            </g>`;
         });
+        svg += `</svg>`;
 
-        // Dessiner les individus
-        chart.nodes.forEach(node => {
-            const indi = data.indis.find(i => i.id === node.id);
-            const nom = indi ? `${indi.firstName || ''} ${indi.lastName || ''}`.trim() : node.id;
-            
-            svgContent += `
-                <g transform="translate(${node.x}, ${node.y})">
-                    <rect class="node-rect" width="${node.width}" height="${node.height}" rx="4" />
-                    <text class="node-text" x="10" y="30">${nom}</text>
-                </g>`;
-        });
-
-        svgContent += `</svg>`;
-
-        fs.writeFileSync('./arbre.svg', svgContent);
-        console.log("🚀 Succès ! Ouvrez 'arbre.svg' dans votre navigateur.");
+        fs.writeFileSync('./arbre_final.svg', svg);
+        console.log("🚀 Arbre complet généré ! (Ancêtres en bleu, Descendants en vert)");
 
     } catch (err) {
-        console.error("❌ Erreur :", err.message);
+        console.error("❌ Erreur :", err);
     }
 }
 
-genererArbreSVG();
+genererArbreComplet();
