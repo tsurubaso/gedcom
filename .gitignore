@@ -42,3 +42,5 @@ next-env.d.ts
 
 #info prive
 LucasFamilly.ged
+LucasFamilly.json
+LucasFamilly.*
