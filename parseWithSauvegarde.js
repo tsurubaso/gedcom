@@ -9,6 +9,8 @@ options.SetFilePath("./LucasFamilly.ged");
 let parser = new JsonParsing(options);
 
 // 3. Parser le fichier GEDCOM
+
+
 parser.ParseFile((result) => {
   if (result && result.Object) {
     console.log("✅ Parsing réussi !");
