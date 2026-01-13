@@ -3,7 +3,7 @@ const { JsonParsing, ParsingOptions } = require("gedcom.json");
 
 // 1. Configurer les options
 let options = new ParsingOptions();
-options.SetFilePath("./LucasFamilly.ged");
+options.SetFilePath("./LucasFamilly2.ged");
 
 // 2. Créer le parser
 let parser = new JsonParsing(options);
@@ -20,7 +20,7 @@ parser.ParseFile((result) => {
 
     // 4. Sauvegarde dans un fichier
     fs.writeFileSync(
-      "./LucasFamilly.json",
+      "./LucasFamilly2.json",
       jsonData,
       "utf-8"
     );

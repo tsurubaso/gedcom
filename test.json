@@ -1,0 +1,54 @@
+    {
+      "Id": "@I1@",
+      "Fullname": "yyyyyyyyyyyyyyyy",
+      "Sex": "M",
+      "Birth": {
+        "Date": {
+          "Original": "01 MAY 1946",
+          "HasYear": true,
+          "HasMonth": true,
+          "HasDay": true,
+          "Value": "1946-04-30T15:00:00.000Z"
+        },
+        "Place": "Orléans, 45234, Loiret, Centre-Val de Loire, France"
+      },
+      "Death": {
+        "Date": {
+          "Original": "05 JUN 2025",
+          "HasYear": true,
+          "HasMonth": true,
+          "HasDay": true,
+          "Value": "2025-06-04T15:00:00.000Z"
+        },
+        "Place": "Paris, 75016, Paris, Ile-de-France, France"
+      },
+      "Occupation": "Journaliste",
+      "Relations": [
+        "@F1@",
+        "@F2@",
+        "@F3@"
+      ]
+    },
+    {
+      "Id": "@I2@",
+      "Fullname": "xxxxxxxxxxxxxxx",
+      "Sex": "F",
+      "Birth": {
+        "Date": {
+          "Original": "07 JAN 1947",
+          "HasYear": true,
+          "HasMonth": true,
+          "HasDay": true,
+          "Value": "1947-01-06T15:00:00.000Z"
+        },
+        "Place": " France"
+      },
+      "Occupation": "Professeur de philosophie",
+      "Relations": [
+        "@F4@",
+        "@F2@"
+      ],
+      "Notes": {
+        "Id": "A choisi \"Aline\" comme prénom d'usage"
+      }
+    },
