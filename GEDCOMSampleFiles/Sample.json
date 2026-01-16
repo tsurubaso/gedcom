@@ -1,0 +1,235 @@
+{
+  "Head": {
+    "Gedcom": {
+      "Version": "5.5.5",
+      "Format": {
+        "Value": "LINEAGE-LINKED",
+        "Version": "5.5.5"
+      }
+    },
+    "Characters": "UTF-8",
+    "Source": {
+      "Name": [
+        "GS",
+        "GEDCOM Specification"
+      ],
+      "Version": "5.5.5",
+      "Corporation": {
+        "Value": "gedcom.org",
+        "Address": {
+          "City": "LEIDEN"
+        },
+        "Web": "www.gedcom.org"
+      }
+    },
+    "Date": {
+      "Original": "2 Oct 2019 0:00:00",
+      "HasYear": true,
+      "HasMonth": true,
+      "HasDay": true,
+      "Value": "2019-10-01T15:00:00.000Z"
+    },
+    "File": "555Sample.ged",
+    "Language": "English",
+    "Submitter": {
+      "Id": "@U1@"
+    }
+  },
+  "Submitter": [
+    {
+      "Id": "@U1@",
+      "Name": "Reldon Poulson",
+      "Address": {
+        "Adress1": "1900 43rd Street West",
+        "City": "Billings",
+        "State": "Montana",
+        "PostalCode": "68051",
+        "Country": "United States of America"
+      },
+      "Phone": "+1 (406) 555-1232"
+    }
+  ],
+  "Individuals": [
+    {
+      "Id": "@I1@",
+      "Givenname": "Robert Eugene",
+      "Surname": "Williams",
+      "Fullname": "Robert Eugene /Williams/",
+      "Sex": "M",
+      "Birth": {
+        "Date": {
+          "Original": "2 Oct 1822",
+          "HasYear": true,
+          "HasMonth": true,
+          "HasDay": true,
+          "Value": "1822-10-01T14:41:01.000Z"
+        },
+        "Place": "Weston, Madison, Connecticut, United States of America",
+        "Source": {
+          "Name": "@S1@"
+        }
+      },
+      "Death": {
+        "Date": {
+          "Original": "14 Apr 1905",
+          "HasYear": true,
+          "HasMonth": true,
+          "HasDay": true,
+          "Value": "1905-04-13T15:00:00.000Z"
+        },
+        "Place": "Stamford, Fairfield, Connecticut, United States of America"
+      },
+      "Burial": {
+        "Place": "Spring Hill Cemetery, Stamford, Fairfield, Connecticut, United States of America"
+      },
+      "Relations": [
+        "@F1@",
+        "@F2@"
+      ],
+      "Residence": {
+        "Date": {
+          "Original": "from 1900 to 1905",
+          "From": {
+            "HasYear": true,
+            "HasMonth": false,
+            "HasDay": false,
+            "Value": "1899-12-31T15:00:00.000Z"
+          },
+          "To": {
+            "HasYear": true,
+            "HasMonth": false,
+            "HasDay": false,
+            "Value": "1904-12-31T15:00:00.000Z"
+          }
+        }
+      }
+    },
+    {
+      "Id": "@I2@",
+      "Givenname": "Mary Ann",
+      "Surname": "Wilson",
+      "Fullname": "Mary Ann /Wilson/",
+      "Sex": "F",
+      "Birth": {
+        "Date": {
+          "Original": "BEF 1828",
+          "Before": true,
+          "HasYear": true,
+          "HasMonth": false,
+          "HasDay": false,
+          "Value": "1827-12-31T14:41:01.000Z"
+        },
+        "Place": "Connecticut, United States of America"
+      },
+      "Relations": "@F1@"
+    },
+    {
+      "Id": "@I3@",
+      "Givenname": "Joe",
+      "Surname": "Williams",
+      "Fullname": "Joe /Williams/",
+      "Sex": "M",
+      "Birth": {
+        "Date": {
+          "Original": "11 Jun 1861",
+          "HasYear": true,
+          "HasMonth": true,
+          "HasDay": true,
+          "Value": "1861-06-10T14:41:01.000Z"
+        },
+        "Place": "Idaho Falls, Bonneville, Idaho, United States of America"
+      },
+      "Relations": [
+        "@F1@",
+        {
+          "Value": "@F2@",
+          "Pedigree": "adopted"
+        }
+      ],
+      "Adoption": {
+        "Date": {
+          "Original": "16 Mar 1864",
+          "HasYear": true,
+          "HasMonth": true,
+          "HasDay": true,
+          "Value": "1864-03-15T14:41:01.000Z"
+        }
+      }
+    }
+  ],
+  "Relations": [
+    {
+      "Id": "@F1@",
+      "Husband": "@I1@",
+      "Wife": "@I2@",
+      "Children": "@I3@",
+      "Marriage": {
+        "Date": {
+          "Original": "Dec 1859",
+          "Between": {
+            "HasYear": true,
+            "HasMonth": true,
+            "HasDay": true,
+            "Value": "1859-11-30T14:41:01.000Z"
+          },
+          "And": {
+            "Value": "1859-12-31T14:41:01.000Z",
+            "HasYear": true,
+            "HasMonth": true,
+            "HasDay": true
+          }
+        },
+        "Place": "Rapid City, Pennington, South Dakota, United States of America"
+      }
+    },
+    {
+      "Id": "@F2@",
+      "Husband": "@I1@",
+      "Children": "@I3@"
+    }
+  ],
+  "Source": {
+    "Name": "@S1@",
+    "Data": {
+      "Events": {
+        "Name": "BIRT, DEAT, MARR",
+        "Place": "Madison, Connecticut, United States of America",
+        "Date": {
+          "Original": "FROM Jan 1820 TO DEC 1825",
+          "From": {
+            "HasYear": true,
+            "HasMonth": true,
+            "HasDay": false,
+            "Value": "1819-12-31T14:41:01.000Z"
+          },
+          "To": {
+            "HasYear": true,
+            "HasMonth": true,
+            "HasDay": false,
+            "Value": "1825-11-30T14:41:01.000Z"
+          }
+        }
+      },
+      "Agency": "Madison County Court"
+    },
+    "Title": "Madison County Birth, Death, and Marriage Records",
+    "Abbreviation": "Madison BMD Records",
+    "Repositories": {
+      "Id": "@R1@",
+      "CallNumber": "13B-1234.01"
+    }
+  },
+  "Repositories": [
+    {
+      "Id": "@R1@",
+      "Name": "Family History Library",
+      "Address": {
+        "Adress1": "35 N West Temple Street",
+        "City": "Salt Lake City",
+        "State": "Utah",
+        "PostalCode": "84150",
+        "Country": "United States of America"
+      }
+    }
+  ]
+}

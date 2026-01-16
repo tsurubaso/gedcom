@@ -3,7 +3,7 @@ const { JsonParsing, ParsingOptions } = require("gedcom.json");
 
 // 1. Configurer les options
 let options = new ParsingOptions();
-options.SetFilePath("./LucasFamilly2.ged");
+options.SetFilePath("555SAMPLE.GED");
 
 // 2. Créer le parser
 let parser = new JsonParsing(options);
@@ -20,12 +20,12 @@ parser.ParseFile((result) => {
 
     // 4. Sauvegarde dans un fichier
     fs.writeFileSync(
-      "./LucasFamilly2.json",
+      "./samples.json",
       jsonData,
       "utf-8"
     );
 
-    console.log("💾 Fichier sauvegardé : LucasFamilly.json");
+    console.log("💾 Fichier sauvegardé : sample.json");
 
   } else {
     console.error("❌ Échec : résultat vide. Vérifie le chemin du fichier GEDCOM.");

@@ -1,0 +1,97 @@
+{
+  "nodes": [
+    {
+      "id": "@U1@"
+    },
+    {
+      "id": "@I1@"
+    },
+    {
+      "id": "@I2@"
+    },
+    {
+      "id": "@I3@"
+    },
+    {
+      "id": "@F1@"
+    },
+    {
+      "id": "@F2@"
+    },
+    {
+      "id": "@R1@"
+    }
+  ],
+  "edges": [
+    {
+      "from": "@I1@",
+      "to": "@F1@",
+      "type": "relation"
+    },
+    {
+      "from": "@I1@",
+      "to": "@F2@",
+      "type": "relation"
+    },
+    {
+      "from": "@I1@",
+      "to": "@F1@",
+      "type": "spouse"
+    },
+    {
+      "from": "@I1@",
+      "to": "@F2@",
+      "type": "spouse"
+    },
+    {
+      "from": "@I2@",
+      "to": "@F1@",
+      "type": "relation"
+    },
+    {
+      "from": "@I2@",
+      "to": "@F1@",
+      "type": "spouse"
+    },
+    {
+      "from": "@I3@",
+      "to": "@F1@",
+      "type": "relation"
+    },
+    {
+      "from": "@I3@",
+      "to": "@F1@",
+      "type": "child"
+    },
+    {
+      "from": "@I3@",
+      "to": "@F2@",
+      "type": "child"
+    },
+    {
+      "from": "@F1@",
+      "to": "@I1@",
+      "type": "spouse"
+    },
+    {
+      "from": "@F1@",
+      "to": "@I2@",
+      "type": "spouse"
+    },
+    {
+      "from": "@F1@",
+      "to": "@I3@",
+      "type": "parent"
+    },
+    {
+      "from": "@F2@",
+      "to": "@I1@",
+      "type": "spouse"
+    },
+    {
+      "from": "@F2@",
+      "to": "@I3@",
+      "type": "parent"
+    }
+  ]
+}
