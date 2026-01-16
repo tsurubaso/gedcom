@@ -10,7 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "gedcom.json": "^1.0.9",
-    "topola": "^3.8.1"
+    "gedcom.json": "^1.0.9"
   }
 }
